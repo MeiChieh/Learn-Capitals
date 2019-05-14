@@ -1,9 +1,9 @@
 import React from "react";
-import "./App.css";
+import "./App.scss";
 
 const Header = () => {
   return (
-    <div className="header">
+    <div className="app-header">
       <h2 className="ui header">
         <i className="flag icon" />
         <div className="content">Learn World Countries</div>

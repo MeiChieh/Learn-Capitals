@@ -1,11 +1,12 @@
 /* should be able to adjust the width of .chat-content according to text */
+@import "variables.scss";
 
 /* -----App-------------------------------------------------------------------------------------------------------- */
 
 body {
   margin: 0;
   box-sizing: border-box;
-  background: black;
+  background: #080b14;
 }
 .app-layout {
   width: 80vw;
@@ -17,10 +18,10 @@ body {
 }
 /* -----Header--------------------------------------------------------------------------------------------------- */
 
-.header {
+.app-header {
   width: 80vw;
   height: 15vh;
-  background-color: #3b5998;
+  background-color: $headerBlue;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,17 +32,9 @@ body {
 
 /* -----ChatboxLayout------------------------------------------------------------------------------------------------ */
 
-.chatbox-layout-left {
+.chatbox-layout {
   padding-top: 20vh;
-  background-color: beige;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  /* border: solid red; */
-}
-.chatbox-layout-right {
-  padding-top: 20vh;
+  padding-bottom: 10vh;
   background-color: beige;
   display: flex;
   flex-direction: column;
@@ -52,82 +45,120 @@ body {
 
 .chatbox-left {
   /* background-color: gray; */
-  width: 60vw;
+  width: 70vw;
   height: 50px;
-  margin-right: 12vw;
+  /* margin-right: 4vw; */
   margin-bottom: 20px;
   position: relative;
+  /* border: solid gray; */
+  display: flex;
+  justify-content: flex-start;
 }
 
 .avatar-left {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #034f84;
+  border: solid $chatDarkPink;
+  background-color: beige;
   bottom: 5px;
   display: inline-block;
-  position: absolute;
   z-index: 2;
+  position: relative;
+}
+
+.robot-icon {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  left: 6px;
+  top: 6px;
 }
 
 .chat-content-left {
   width: 55vw;
   height: 50px;
   border-radius: 5px;
-  background-color: #92a8d1;
+  background-color: $chatLightPink;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   position: absolute;
   left: 30px;
 }
 .chat-message-left {
-  position: absolute;
-  left: 20px;
+  padding-left: 20px;
 }
 /* -----ChatboxRight--------------------------------------------------------------------------------------------------- */
 
 .chatbox-right {
-  width: 60vw;
+  width: 70vw;
   height: 50px;
-  /* margin-left: 65px; */
-  margin-right: 10px;
   margin-bottom: 20px;
   position: relative;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .avatar-right {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #f7786b;
+  background-color: beige;
+  border: solid $chatDarkBlue;
   bottom: 5px;
   display: inline-block;
-  position: absolute;
-  left: 57vw;
   z-index: 2;
+  position: relative;
+}
+
+.user-icon {
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  // left: 0.5px;
+  // top: 0.7px;
 }
 
 .chat-content-right {
   width: 55vw;
   height: 50px;
   border-radius: 5px;
-  background-color: #f7cac9;
+  background-color: $chatLightBlue;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   position: absolute;
-  left: 30px;
+  right: 30px;
 }
 .chat-message-right {
   position: absolute;
   width: 50vw;
-  right: 20px;
   text-align: right;
-  /* border: solid green; */
+  padding-right: 20px;
 }
 
 /* -----InputArea--------------------------------------------------------------------------------------------------- */
 
 .input-area {
   width: 80vw;
-  height: ;
+  height: 10vh;
+  position: fixed;
+  background-color: darkgray;
+  z-index: 10;
+  bottom: 0px;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Searchbar */
+.searchbar {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 5vw;
+  margin: auto;
+}
+/* IconBtn */
+.iconbtn {
+  margin: auto;
 }
