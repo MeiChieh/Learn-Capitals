@@ -13,7 +13,7 @@ class ChatboxLayout extends React.Component {
   //     console.log(item.country);
   //   }
   // };
-
+console.log(hahahhahah)
   render() {
     const children = [];
     const { gameRecord } = this.props;
