@@ -7,12 +7,13 @@ body {
   margin: 0;
   box-sizing: border-box;
   background: #080b14;
-  font-family: "Kodchasan", Arial;
+  // font-family: "Kodchasan", Arial;
+  font-family: Arial;
 }
 .app-layout {
   width: 80vw;
   height: 100vh;
-  background-color: lightgray;
+  background-color: beige;
   margin-left: 10vw;
   margin-right: 10vw;
   /* overflow: auto; */
@@ -45,112 +46,135 @@ body {
   padding: 5px;
 }
 
-/* -----ChatboxLayout------------------------------------------------------------------------------------------------ */
-
+//ChatboxLayout---------
 .chatbox-layout {
-  padding-top: 20vh;
-  padding-bottom: 10vh;
+  // padding-top: 5vh;
+  padding-bottom: 12vh;
   background-color: beige;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
 }
-/* -----ChatboxLeft--------------------------------------------------------------------------------------------------- */
-
-.chatbox-left {
-  /* background-color: gray; */
-  width: 70vw;
-  height: 50px;
-  /* margin-right: 4vw; */
-  margin-bottom: 20px;
-  position: relative;
-  /* border: solid gray; */
+//ChatboxFirstspace---------
+.chatbox-firstspace {
+  background-color: beige;
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.avatar-left {
+// to avoid the child to set margin to the parent
+.chatbox-firstspace::before {
+  content: "";
+  display: block;
+  height: 20vh;
+  background-color: beige;
+}
+
+//-----ChatboxLeft && ChatboxRight--------------------------------------------------
+// chatbox -----------
+.chatbox {
+  width: 70vw;
+  height: auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  position: relative;
+  display: flex;
+  // border: solid blue;
+}
+.chatbox-left {
+  justify-content: flex-start;
+}
+.chatbox-right {
+  justify-content: flex-end;
+}
+
+//avatar----------
+.avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: solid $chatDarkPink;
   background-color: beige;
   bottom: 5px;
   display: inline-block;
   z-index: 2;
   position: relative;
 }
+.avatar-left {
+  border: solid $chatDarkPink;
+  left: 10px;
+}
+.avatar-right {
+  border: solid $chatDarkBlue;
+  right: 10px;
+}
 
-.robot-icon {
+//chat icon-----------
+.chaticon {
+  position: absolute;
+}
+.chaticon-left {
   width: 24px;
   height: 24px;
-  position: absolute;
   left: 6px;
   top: 6px;
 }
-
-.chat-content-left {
-  width: 55vw;
-  height: 50px;
-  border-radius: 5px;
-  background-color: $chatLightPink;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  position: absolute;
-  left: 30px;
-}
-.chat-message-left {
-  padding-left: 20px;
-}
-/* -----ChatboxRight--------------------------------------------------------------------------------------------------- */
-
-.chatbox-right {
-  width: 70vw;
-  height: 50px;
-  margin-bottom: 20px;
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.avatar-right {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: beige;
-  border: solid $chatDarkBlue;
-  bottom: 5px;
-  display: inline-block;
-  z-index: 2;
-  position: relative;
-}
-
-.user-icon {
+.chaticon-right {
   width: 36px;
   height: 36px;
-  position: absolute;
-  // left: 0.5px;
-  // top: 0.7px;
 }
 
-.chat-content-right {
+// chat content---------
+.chat-content {
   width: 55vw;
-  height: 50px;
+  height: auto;
   border-radius: 5px;
-  background-color: $chatLightBlue;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  position: absolute;
-  right: 30px;
+  position: relative;
+  padding: 20px 0px;
 }
-.chat-message-right {
+.chat-content-left {
+  background-color: $chatLightPink;
+  justify-content: flex-start;
+}
+.chat-content-right {
+  background-color: $chatLightBlue;
+  justify-content: flex-end;
+}
+
+//chat-message---------
+.chat-message {
+  width: 55vw;
+  // word-break: break-all;
+  hyphens: auto;
+  height: auto;
+  font-size: 10px;
+  text-align: justify;
+  padding-left: 3vw;
+  padding-right: 3vw;
+}
+
+.playbtn {
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid black;
+  background-color: white;
+  border-radius: 4px;
+  font-weight: 700;
   position: absolute;
-  width: 50vw;
-  text-align: right;
-  padding-right: 20px;
+  bottom: 15px;
+  right: 15px;
+  padding: 2.5px;
+}
+.playbtn:hover {
+  cursor: pointer;
+  background-color: black;
+  color: white;
 }
 
 /* -----InputArea--------------------------------------------------------------------------------------------------- */
