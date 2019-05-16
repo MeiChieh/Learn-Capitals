@@ -16,6 +16,9 @@ class ChatboxLayout extends React.Component {
     }
     for (let item of this.props.gameRecord) {
       console.log(item.country);
+      console.log(item.country);
+      console.log(item.country);
+      console.log(item.country);
     }
   };
 
