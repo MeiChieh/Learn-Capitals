@@ -6,7 +6,6 @@ import ChatboxFirstSpace from "./ChatboxFirstSpace";
 import ChatboxLayout from "./ChatboxLayout";
 import ChatboxLeft from "./ChatboxLeft";
 import Playbtn from "./Playbtn";
-// import ChatboxRight from "./ChatboxRight";
 import InputArea from "./InputArea";
 import Searchbar from "./Searchbar";
 // inline style
@@ -15,29 +14,26 @@ import firstChatStyle from "./inlineStyle.js";
 class App extends React.Component {
   state = {
     gameRecord: [],
-    ask: false
+    ask: false,
+    noInput: []
   };
 
   // first chat message
   firstChat =
     "Hello, welcome to learn world countries. I am Roboto, let's prepare you for the next Irish bar drinking game. I will give you the name of the country, and you have to tell me where it's capital is. If you are not sure about where this country is, you can click on the map icon and have a look.";
+
   // styling for the first chat
   firstChatStyle = firstChatStyle.firstChatStyle;
 
-  // when play button is clicked
+  // if submit under no input, push noImputMessage to noInput
+  // noInput = [];
+  noInputMessage = <ChatboxLeft message="Please click Play Game to start" />;
+
+  // when play button is clicked, fetch country data
   playClicked = () => {
     console.log("play clicked!");
     this.fetchRandomCountry();
-    this.askQuestion();
   };
-
-  askQuestion = () => {
-    return true;
-  };
-
-  // componentDidMount() {
-  //   this.fetchRandomCountry();
-  // }
 
   async fetchRandomCountry() {
     const response = await fetch(`https://restcountries.eu/rest/v2/all`);
@@ -64,8 +60,37 @@ class App extends React.Component {
     const updateRecord = [...this.state.gameRecord, currentCountry];
     //set the copy as new state
     this.setState({ gameRecord: updateRecord });
-    console.log(this.state.gameRecord[0]);
+    // console.log(this.state.gameRecord[this.state.gameRecord.length - 1]);
   }
+
+  inputProcessing = async inputValue => {
+    if (this.state.gameRecord.length === 0) {
+      this.setState({ noInput: this.noInputMessage });
+    } else {
+      await this.addInput(inputValue);
+      await this.hah();
+    }
+  };
+
+  hah = () => {
+    console.log(this.state.gameRecord);
+  };
+
+  //add userInput into gameRecord state
+  addInput = inputValue => {
+    const appState = this.state.gameRecord;
+    // get the current game record
+    const currentGame = appState[appState.length - 1];
+    // put user input into current game record
+    currentGame.userInput = inputValue;
+    // remove the last game record from current state,
+    appState.pop();
+    // add the userInput added current game record
+    const updatedState = [...appState, currentGame];
+    // update state
+    this.setState({ gameRecord: updatedState });
+    // console.log(updatedState);
+  };
 
   render() {
     return (
@@ -78,15 +103,14 @@ class App extends React.Component {
           >
             <Playbtn playClicked={this.playClicked} />
           </ChatboxLeft>
+          {/* <ChatboxLeft message="Please click Play Game to start" /> */}
+          {this.state.noInput}
         </ChatboxFirstSpace>
 
-        <ChatboxLayout
-          askQuestion={this.askQuestion}
-          gameRecord={this.state.gameRecord}
-        />
+        <ChatboxLayout gameRecord={this.state.gameRecord} />
 
         <InputArea>
-          <Searchbar />
+          <Searchbar addInput={this.inputProcessing} />
         </InputArea>
       </div>
     );

@@ -3,49 +3,22 @@ import ChatboxLeft from "./ChatboxLeft";
 // import ChatboxLeft from "./ChatboxLeft";
 // import ChatboxRight from "./ChatboxRight";
 
-class ChatboxLayout extends React.Component {
-  state = {};
-  // askCountry = () => {
-  //   if (this.props.gameRecord.length == 0) {
-  //     return;
-  //   }
-  //   for (let item of this.props.gameRecord) {
-  //     console.log(item.country);
-  //   }
-  // };
-console.log(hahahhahah)
-  render() {
-    const children = [];
-    const { gameRecord } = this.props;
+const ChatboxLayout = props => {
+  const children = [];
+  const { gameRecord } = props;
 
-    for (let item of gameRecord) {
-      if (gameRecord.length == 0) {
-        return;
-      }
-      const { country } = item;
-
-      // function pushIt() {
-      //   setTimeout(() => {
-      children.push(
-        <ChatboxLeft message={`Where is the capital of ${country} ?`} />
-      );
-      //   }, 1000);
-      // }
+  for (let item of gameRecord) {
+    if (gameRecord.length === 0) {
+      return;
     }
+    const { country, id } = item;
 
-    return <div className="chatbox-layout">{children}</div>;
+    // setTimeout cannot be set successfully
+    children.push(
+      <ChatboxLeft message={`Where is the capital of ${country} ?`} key={id} />
+    );
   }
 
-  // if (askQuestion == true) {
-  //   console.log("ask it");
-  // }
-
-  // for (let item of gameRecord) {
-  //   return (
-  //     <div className="chatbox-layout">
-  //       <ChatboxLeft message={`Where is the capital of ${item.country}`} />
-  //     </div>
-  //   );
-  // }
-}
+  return <div className="chatbox-layout">{children}</div>;
+};
 export default ChatboxLayout;
