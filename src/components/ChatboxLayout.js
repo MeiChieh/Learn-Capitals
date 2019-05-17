@@ -4,21 +4,14 @@ import ChatboxRight from "./ChatboxRight";
 
 const ChatboxLayout = props => {
   const children = [];
-  // const { gameRecord } = props;
-
-  // const lag = item => {
-  //   setTimeout(() => {
-  //     console.log(item);
-  //     this.children.push(item);
-  //   }, 1000);
-  // };
 
   // never do async in rendering, bc react has to gather all render data and render them altogether
+  // instead, just update the state asynchronously
 
   const { gameRecord } = props;
 
   for (let item of gameRecord) {
-    const { country, id, showAns, userInput } = item;
+    const { country, id, userAnswered, userInput } = item;
     // render both question and answer when question is answered
     const qAndA = (
       <div key={id}>
@@ -37,9 +30,8 @@ const ChatboxLayout = props => {
       return;
     }
 
-    // if showAns === false, only push left, vice versa
-    showAns ? children.push(qAndA) : children.push(onlyQ);
-    // showAns ? this.lag(qAndA) : this.lag(onlyQ);
+    // if userAnswered === false, only push left, vice versa
+    userAnswered ? children.push(qAndA) : children.push(onlyQ);
   }
 
   return <div className="chatbox-layout">{children}</div>;

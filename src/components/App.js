@@ -17,6 +17,7 @@ class App extends React.Component {
     noInput: []
   };
 
+  // message to output when user input before clicking play game
   noInputMessage = <ChatboxLeft message="Please click [Play Game] to start" />;
 
   // when play button is clicked, fetch country data
@@ -42,9 +43,22 @@ class App extends React.Component {
   dataSetUp(data) {
     const { name: country, capital, flag, area } = data;
     const id = uuid.v4();
-    const showAns = false;
+    const userAnswered = false;
+    const isCorrect = false;
+    const correctMessage = "";
+    const wrongMessage = "";
     // make a new object containing current country in the game
-    const currentCountry = { id, country, capital, flag, area, showAns };
+    const currentCountry = {
+      id,
+      country,
+      capital,
+      flag,
+      area,
+      userAnswered,
+      isCorrect,
+      correctMessage,
+      wrongMessage
+    };
     // make a copy of the state gameRecord and add the current country object
     const updateRecord = [...this.state.gameRecord, currentCountry];
     //set the copy as new state
@@ -57,21 +71,30 @@ class App extends React.Component {
 
   inputProcessing = async inputValue => {
     if (this.state.gameRecord.length === 0) {
+      // if user input before game start (data fetched)
       this.setState({ noInput: this.noInputMessage });
-      // this.setState({ noInput: this.noInputMessage });
     } else {
-      await this.addInput(inputValue);
+      // set state: update user input, set userAnswered to true
+      await this.stateSettter([
+        ["userInput", inputValue],
+        ["userAnswered", true]
+      ]);
     }
   };
 
-  //add userInput into gameRecord state
-  addInput = inputValue => {
+  // uiversal state setter
+  stateSettter = updateArr => {
+    // updateArr = [[key1, value1],[key2, value2]]
+    // get gameRecord state
     const appState = this.state.gameRecord;
     // get the current game record
     const currentGame = appState[appState.length - 1];
     // put user input into current game record
-    currentGame.userInput = inputValue;
-    currentGame.showAns = true;
+    for (let item of updateArr) {
+      const key = item[0];
+      const value = item[1];
+      currentGame[key] = value;
+    }
     // remove the last game record from current state,
     appState.pop();
     // add the userInput added current game record
@@ -80,6 +103,33 @@ class App extends React.Component {
     this.setState({ gameRecord: updatedState });
     // this.setState({ gameRecord: updatedState });
     console.log(updatedState);
+  };
+
+  // turn input into pure alphabet and return
+  pureAlphabet(str) {
+    const pure = str
+      .toUpperCase()
+      .split("")
+      .filter(item => item.charCodeAt() >= 65 && item.charCodeAt() <= 90)
+      .join("");
+
+    console.log(pure);
+    return pure;
+  }
+  // compare user input and ans
+  compareAns = async updatedState => {
+    const { country, capital, userInput } = updatedState;
+    console.log(capital);
+    // process input and answer to pure alphabet
+    const pureAlphInput = this.pureAlphabet(userInput);
+    const pureAlphAns = this.pureAlphabet(capital);
+    console.log(pureAlphAns);
+    // compare both, if equal, update
+    if (pureAlphInput === pureAlphAns) {
+      console.log("brillant!");
+    } else {
+      console.log(`This is not the capital of ${country}`);
+    }
   };
 
   render() {

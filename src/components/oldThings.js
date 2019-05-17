@@ -27,3 +27,21 @@
 //  [cI:{},
 //   uI:{}]
 //}
+
+//add userInput into gameRecord state
+addInput = inputValue => {
+  const appState = this.state.gameRecord;
+  // get the current game record
+  const currentGame = appState[appState.length - 1];
+  // put user input into current game record
+  currentGame.userInput = inputValue;
+  currentGame.userAnswered = true;
+  // remove the last game record from current state,
+  appState.pop();
+  // add the userInput added current game record
+  const updatedState = [...appState, currentGame];
+  // update state
+  this.setState({ gameRecord: updatedState });
+  // this.setState({ gameRecord: updatedState });
+  console.log(updatedState);
+};

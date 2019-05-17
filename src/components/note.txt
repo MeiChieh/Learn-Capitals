@@ -1,0 +1,33 @@
+  !! Practice makes perfect. There's a long way to perfect, we document to make practice worthit!
+
+  1) Async rendering
+  -- Problem: trying to set async rendering using setTimeout or asyna/await or promise
+  -- Failure: try to setTimeout for pushing data to a variable in return (rendering.) 
+              The render statement in setTimeout did not work, although the 
+              console.log() worked.         
+  -- Explain: Not able to do any form of async in rendering, bc react has to gather all render 
+             data and render them altogether, it is not possible to do this in a 
+             retrospect fashion.            
+  -- Solution: Move the asyncronousity to state updating to achieve the same effect.
+
+  2) Component event handling
+  -- Problem: How to append a component on click?
+  -- Solution: add a {children} to component render, and push component into this 
+               {children} on event
+
+  3) Controlled component    
+  -- Problem: How to get data from input/form... in a controlled component manner?
+  -- Bad Method: Use this.target.value to get the value
+  -- Solution: input onchange = handlechangefunction ... (push to state) & input.value = state
+  -- Noteworthy: there's no submit event for input but only for form, onchange event if for form
+
+  4) Clear form
+  -- Problem: How to clear a form after submit?
+  -- Failure: tried to set this.firstChild.target.value = '', did not work
+  -- Explain: It did not work bc the input value now depends on the state
+  -- Solution: Just update the state = '', after form submit         
+
+  5) Margin
+  -- Problem: set margin-top for child element, but the margin is applied to parent element
+  -- Explain: For some mysterious reason, react does this automatically
+  -- Solution: use pseudo element ::before, or use padding instead 
