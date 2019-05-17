@@ -5,6 +5,14 @@ class Searchbar extends React.Component {
   // if input submitted, push the submitted value to state, and set the value of input
   // to the submitted value of the state
   // this.props.addInput
+  constructor() {
+    super();
+    this.inputField = React.createRef();
+  }
+
+  componentDidMount() {
+    this.inputField.focus();
+  }
 
   state = { userInput: "" };
 
@@ -15,15 +23,9 @@ class Searchbar extends React.Component {
 
   submitIt = e => {
     e.preventDefault();
-    // console.log(this.state.userInput);
     this.props.addInput(this.state.userInput);
     // cannot have any delay, or the event is not recognized
     this.setState({ userInput: "" });
-  };
-
-  clearField = e => {
-    e.target.value = "";
-    console.log(e.target);
   };
 
   render() {
@@ -36,7 +38,10 @@ class Searchbar extends React.Component {
             placeholder="Enter Capital Name"
             value={this.state.userInput}
             onChange={this.fetchInput}
-            // onFocus={this.clearField}
+            // I dont understand this line!
+            ref={el => {
+              this.inputField = el;
+            }}
           />
           <button type="submit" className="input-button">
             <div className="input-button-text">Submit</div>

@@ -74,13 +74,6 @@ body {
 }
 
 //-----ChatboxLeft && ChatboxRight--------------------------------------------------
-// chatbox existence
-.hideAns {
-  display: none;
-}
-.showAns {
-  display: block;
-}
 // chatbox -----------
 .chatbox {
   width: 70vw;
@@ -96,7 +89,7 @@ body {
 }
 .chatbox-right {
   justify-content: flex-end;
-  padding-top: 10px;
+  padding-top: 3px;
 }
 
 //avatar----------
@@ -234,4 +227,10 @@ body {
 /* IconBtn */
 .iconbtn {
   margin: auto;
+}
+
+//flag rendering
+.flagStyle {
+  border: solid blue;
+  width: 50px;
 }
