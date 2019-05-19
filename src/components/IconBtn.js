@@ -1,15 +1,10 @@
 import React from "react";
-import "./App.scss";
 
-const IconBtn = () => {
+const IconBtn = props => {
   return (
-    <div className="iconbtn">
-      <button className="ui labeled icon button">
-        <i className="map icon" />
-        Show Map
-      </button>
+    <div onClick={props.func} className="iconbtn">
+      <div>{props.message}</div>
     </div>
   );
 };
-
 export default IconBtn;

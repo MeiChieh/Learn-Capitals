@@ -1,11 +1,9 @@
 import React from "react";
 import ChatboxLeft from "./ChatboxLeft";
 import ChatboxRight from "./ChatboxRight";
-// import InfoBlock from "./InfoBlock";
 import { bolder } from "./helper.js";
 
 class ChatboxLayout extends React.Component {
-  // window scroll must be placed here, but why?
   componentDidMount() {
     window.scrollTo(0, document.body.scrollHeight);
   }
@@ -19,7 +17,7 @@ class ChatboxLayout extends React.Component {
         country,
         capital,
         region,
-        language,
+        languages,
         population,
         idLs,
         flag,
@@ -30,24 +28,7 @@ class ChatboxLayout extends React.Component {
         wrongMessage,
         moreInfo
       } = item;
-      console.log(language);
-      // const showLanguage = language => {
-      //   for (let item of language) {
-      //     return item;
-      //   }
-      // };
-      // console.log(language);
-      // console.log(languages[0]);
 
-      // const getLanguages = async languages => {
-      //   await languages.onload();
-      //   for (let item of languages) {
-      //     console.log(item.name);
-      //     return item.name;
-      //   }
-      // };
-      // getLanguages();
-      // chat content [robQ, userAns, robCorr, robWrong]
       const robotQuestion = (
         <ChatboxLeft
           message={["What is the capital of ", bolder(country), "?"]}
@@ -64,31 +45,27 @@ class ChatboxLayout extends React.Component {
         <ChatboxLeft message={wrongMessage} key={idLs[3]} />
       );
       const robotMoreInfo = (
-        <ChatboxLeft message={moreInfo} key={idLs[4]} className="country-flag">
+        <ChatboxLeft message={moreInfo} key={idLs[4]} className="country-info">
           <div className="country-flag">
-            <div>{country}</div>
+            <div className="country">{country}</div>
             <div>
               <img
                 src={flag}
                 alt={`flag of ${country}`}
-                className="flagStyle"
+                className="flag-style"
               />
             </div>
           </div>
-          <div className="country-basic-info">
-            <div className="capital">Capital: {capital}</div>
-            <div className="region">Region: {region}</div>
-            <div className="language">
-              Main languages: {language}
-              {/* {languages[1].name} */}
-            </div>
-            <div className="population">Population: {population}</div>
+          <div className="country-basic">
+            <div>Capital: {capital}</div>
+            <div>Region: {region}</div>
+            <div>Main languages: {languages}</div>
+            <div>Population: {population}</div>
           </div>
         </ChatboxLeft>
       );
-      // {for (let item of languages){return item.name}}
 
-      const universal = () => {
+      const chatLogic = () => {
         children.push(robotQuestion);
         if (userAnswered) {
           children.push(userAnswer);
@@ -104,9 +81,12 @@ class ChatboxLayout extends React.Component {
             children.push(robotMoreInfo);
           }
         }
+        if (userAnswered === false) {
+          children.push(robotMoreInfo);
+        }
       };
 
-      universal();
+      chatLogic();
     }
 
     return <div className="chatbox-layout">{children}</div>;

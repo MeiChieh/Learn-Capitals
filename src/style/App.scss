@@ -1,14 +1,12 @@
-/* should be able to adjust the width of .chat-content according to text */
 @import "variables.scss";
 
 /* -----App-------------------------------------------------------------------------------------------------------- */
-
 body {
   margin: 0;
   box-sizing: border-box;
-  background: #080b14;
-  // font-family: "Kodchasan", Arial;
+  background: #ccc;
   font-family: Arial;
+  font-size: 15px;
 }
 .app-layout {
   width: 80vw;
@@ -16,7 +14,7 @@ body {
   background-color: beige;
   margin-left: 10vw;
   margin-right: 10vw;
-  /* overflow: auto; */
+  font-size: 15px;
 }
 /* -----Header--------------------------------------------------------------------------------------------------- */
 
@@ -29,21 +27,21 @@ body {
   align-items: center;
   position: fixed;
   z-index: 5;
-  padding-top: 10px;
+  padding-top: 1em;
 }
 
 .header-text {
-  font-size: 30px;
+  font-size: 3em;
   font-weight: 800;
   color: white;
   font-family: "Baloo Bhai", cursive;
 }
 
 .header-img {
-  width: 50px;
-  height: 50px;
-  margin-left: 15px;
-  padding: 5px;
+  width: 5em;
+  height: 5em;
+  margin-left: 1.5em;
+  padding: 0.5em;
 }
 
 //ChatboxLayout---------
@@ -78,8 +76,8 @@ body {
 .chatbox {
   width: 70vw;
   height: auto;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-bottom: 1em;
+  margin-top: 1em;
   position: relative;
   display: flex;
   // border: solid blue;
@@ -89,27 +87,27 @@ body {
 }
 .chatbox-right {
   justify-content: flex-end;
-  padding-top: 3px;
+  padding-top: 0.3em;
 }
 
 //avatar----------
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 3.5em;
+  height: 3.5em;
   border-radius: 50%;
   background-color: beige;
-  bottom: 5px;
+  bottom: 0.5em;
   display: inline-block;
   z-index: 2;
   position: relative;
 }
 .avatar-left {
   border: solid $chatDarkPink;
-  left: 10px;
+  left: 1em;
 }
 .avatar-right {
   border: solid $chatDarkBlue;
-  right: 10px;
+  right: 1em;
 }
 
 //chat icon-----------
@@ -117,25 +115,25 @@ body {
   position: absolute;
 }
 .chaticon-left {
-  width: 24px;
-  height: 24px;
-  left: 6px;
-  top: 6px;
+  width: 2.4em;
+  height: 2.4em;
+  left: 0.6em;
+  top: 0.6em;
 }
 .chaticon-right {
-  width: 36px;
-  height: 36px;
+  width: 3.5em;
+  height: 3.5em;
 }
 
 // chat content---------
 .chat-content {
   width: 55vw;
   height: auto;
-  border-radius: 5px;
+  border-radius: 0.5em;
   display: flex;
   align-items: center;
   position: relative;
-  padding: 20px 0px;
+  padding: 2em 0em;
 }
 .chat-content-left {
   background-color: $chatLightPink;
@@ -149,28 +147,28 @@ body {
 //chat-message---------
 .chat-message {
   width: 55vw;
-  // word-break: break-all;
   hyphens: auto;
   height: auto;
-  font-size: 10px;
+  font-size: 1em;
   text-align: justify;
   padding-left: 3vw;
   padding-right: 3vw;
+  line-height: 1.5em;
 }
 
 .playbtn {
-  height: 20px;
+  height: 2em;
   display: flex;
   justify-content: center;
   align-items: center;
   border: solid black;
   background-color: white;
-  border-radius: 4px;
+  border-radius: 0.4em;
   font-weight: 700;
   position: absolute;
-  bottom: 15px;
-  right: 15px;
-  padding: 2.5px;
+  bottom: 0.5em;
+  right: 1.5em;
+  padding: 0.1em 0.2em;
 }
 .playbtn:hover {
   cursor: pointer;
@@ -186,51 +184,141 @@ body {
   position: fixed;
   background-color: darkgray;
   z-index: 10;
-  bottom: 0px;
+  bottom: 0em;
   display: flex;
-  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  // border: solid blue;
 }
 
-/* Searchbar */
-.searchbar {
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 5vw;
-  margin: auto;
-}
+//buttons
 
-.input-form {
+.btns {
+  display: flex;
+  align-items: center;
+  // margin-left: 7em;
+  // border: solid pink;
+}
+//input loci
+.input-loci {
+  margin-top: 0.5em;
+  // border: solid green;
   display: flex;
   align-items: center;
 }
 
-.input-field {
-  width: 80%;
-  height: 80%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  // resize: vertical;
-}
-.input-button {
-  height: 80%;
-  background-color: $headerBlue;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.input-button-text {
-  // border: solid red;
-}
-/* IconBtn */
-.iconbtn {
+/* Searchbar */
+.searchbar {
+  // padding-right: 5vw;
   margin: auto;
 }
 
-//flag rendering
-.flagStyle {
-  border: solid blue;
-  width: 50px;
+.input-form {
+  width: 350px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  margin-left: 2.5em;
+}
+
+.input-field {
+  width: 100%;
+  height: 1em;
+  padding: 0.8em;
+  border: 0.1em solid #ccc;
+  border-radius: 0.3em;
+  font-size: 0.8em;
+  margin-bottom: 0.25em;
+}
+.input-button {
+  font-size: 0.7em;
+  height: 3em;
+  background-color: $headerBlue;
+  color: white;
+  border-radius: 0.3em;
+  font-weight: 700;
+  padding: 0em 1em;
+  margin-bottom: 0.25em;
+}
+.input-button:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+/* IconBtn */
+// buttos
+.iconbtn {
+  height: 1em;
+  width: 7em;
+  font-size: 1em;
+  word-break: break-word;
+  text-align: center;
+  border: solid #ccc;
+  background-color: $headerBlue;
+  color: white;
+  border-radius: 0.4em;
+  font-weight: 700;
+  margin-top: 0.5em;
+  margin-left: 1em;
+  padding: 1em 0.3em;
+  line-height: 1.3em;
+}
+
+.iconbtn:hover {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}
+
+//moreInfo and flag rendering
+.country-info {
+  display: flex;
+  flex-direction: column;
+}
+.country-flag {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-top: 0.5em;
+  // border: solid green;
+}
+.country {
+  font-size: 2em;
+  font-family: "Baloo Bhai", cursive;
+  font-weight: 900;
+  text-align: center;
+  // margin-right: 1.5em;
+  line-height: 2em;
+}
+.flag-style {
+  width: 6em;
+  padding-top: 0.5em;
+  padding-right: 0.5em;
+}
+.country-basic {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.5em;
+  border-top: solid black;
+  font-weight: 700;
+}
+// mobile
+@media only screen and (max-width: 425px) {
+  .app-layout {
+    width: 100vw;
+    margin-left: 0vw;
+    margin-right: 0vw;
+    font-size: 10px;
+  }
+  .app-header {
+    width: 100vw;
+  }
+  .input-area {
+    width: 100vw;
+  }
 }

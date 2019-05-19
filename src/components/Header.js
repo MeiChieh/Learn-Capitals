@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.scss";
 import earth from "../media/earth5.svg";
 
 const Header = () => {

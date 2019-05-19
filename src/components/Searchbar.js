@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.scss";
 
 class Searchbar extends React.Component {
   // if input submitted, push the submitted value to state, and set the value of input
@@ -12,10 +11,12 @@ class Searchbar extends React.Component {
 
   componentDidMount() {
     this.inputField.focus();
+    // React will assign the current property with the DOM element when the component mounts, and assign it back to null when it unmounts. ref updates happen before componentDidMount or componentDidUpdate lifecycle methods.
   }
 
   state = { userInput: "" };
 
+  //set input state
   fetchInput = e => {
     e.preventDefault();
     this.setState({ userInput: e.target.value });
@@ -28,6 +29,12 @@ class Searchbar extends React.Component {
     this.setState({ userInput: "" });
   };
 
+  // assign element to ref for input to stay focus on new instance
+  // using the ref callback to store a reference to a DOM node in an instance property.
+  setRef = el => {
+    this.inputField = el;
+  };
+
   render() {
     return (
       <div className="searchbar">
@@ -38,10 +45,7 @@ class Searchbar extends React.Component {
             placeholder="Enter Capital Name"
             value={this.state.userInput}
             onChange={this.fetchInput}
-            // I dont understand this line!
-            ref={el => {
-              this.inputField = el;
-            }}
+            ref={this.setRef}
           />
           <button type="submit" className="input-button">
             <div className="input-button-text">Submit</div>

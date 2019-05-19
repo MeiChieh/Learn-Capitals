@@ -1,6 +1,6 @@
 import React from "react";
 import uuid from "uuid";
-import "./App.scss";
+import "../style/App.scss";
 import Header from "./Header";
 import ChatboxFirstSpace from "./ChatboxFirstSpace";
 import ChatboxLayout from "./ChatboxLayout";
@@ -8,33 +8,59 @@ import ChatboxLeft from "./ChatboxLeft";
 import Playbtn from "./Playbtn";
 import InputArea from "./InputArea";
 import Searchbar from "./Searchbar";
-import { firstChat, pureAlphabet, bolder, getLanguage } from "./helper.js";
+import {
+  initialChat,
+  pureAlphabet,
+  bolder,
+  getLanguages,
+  numNotation,
+  praise,
+  pity
+} from "./helper.js";
 
 class App extends React.Component {
   state = {
     gameRecord: [],
+    thirdChat: false,
     noInput: []
   };
 
   componentDidMount() {
     window.scrollTo(0, document.body.scrollHeight);
+    setTimeout(() => {
+      this.setState({ thirdChat: initialChat.thirdChatMessage });
+    }, 2000);
   }
 
   // when play button is clicked, fetch country data
-  playClicked = () => {
+  playClicked = e => {
+    e.preventDefault();
     this.fetchRandomCountry();
+  };
+  showAns = e => {
+    e.preventDefault();
+    if (this.state.gameRecord.length === 0) {
+      return;
+    }
+    setTimeout(() => {
+      this.stateSetter([["userAnswered", false]]);
+    }, 500);
+
+    setTimeout(() => {
+      this.fetchRandomCountry();
+    }, 1500);
   };
 
   async fetchRandomCountry() {
     const response = await fetch(`https://restcountries.eu/rest/v2/all`);
     try {
       const countryJsonData = await response.json();
-      // choose a random country from the 250 countries
+      // choose a random country from the 250 countries in the database
       const randomCountry = await countryJsonData[
         Math.floor(Math.random() * 250)
       ];
       await this.dataSetUp(randomCountry);
-      console.log(randomCountry);
+      // console.log(randomCountry);
     } catch (err) {
       console.error(err);
     }
@@ -48,8 +74,9 @@ class App extends React.Component {
       flag,
       area,
       region,
-      languages,
-      population
+      // latlng,
+      languages: preLanguages,
+      population: prePopulation
     } = data;
     const id = uuid.v4();
     const idLs = [
@@ -61,13 +88,14 @@ class App extends React.Component {
       id + "f",
       id + "g"
     ];
-    const language = await getLanguage(languages);
-    const userAnswered = false;
+    const languages = await getLanguages(preLanguages);
+    const population = numNotation(prePopulation);
+    const userAnswered = null;
     const isCorrect = null;
     const correctMessage = "";
     const wrongMessage = "";
     const moreInfo = false;
-    // make a new object containing current country in the game
+    // make a new object containing current country in the game, and add some custom keys
     const currentCountry = await {
       id,
       idLs,
@@ -76,7 +104,7 @@ class App extends React.Component {
       flag,
       area,
       region,
-      language,
+      languages,
       population,
       userAnswered,
       isCorrect,
@@ -85,30 +113,32 @@ class App extends React.Component {
       moreInfo
     };
     // make a copy of the state gameRecord and add the current country object
-    const updateRecord = [...this.state.gameRecord, currentCountry];
+    const updateRecord = await [...this.state.gameRecord, currentCountry];
+
     //set the copy as new state
-    setTimeout(() => {
+    await setTimeout(() => {
       this.setState({ gameRecord: updateRecord });
-    }, 1000);
+    }, 500);
   }
 
   // input processor for submitted input
   // 1) setState and compare answer
   inputProcessing = async inputValue => {
+    if (inputValue === "") {
+      return;
+    }
     const gameRecord = this.state.gameRecord;
     if (gameRecord.length === 0) {
-      // if user input before game start (data fetched), show remind message
-      this.setState({ noInput: firstChat.noInputMessage });
+      // if user submit input before game start (data fetched), show remind message
+      this.setState({ noInput: initialChat.noInputMessage });
+      // if user submit when answer not compared
     } else {
       // set state: update user input, set userAnswered to true
-      // try{};
-      // catch(){}
       await this.stateSetter([
         ["userInput", inputValue],
         ["userAnswered", true]
       ]);
       await this.compareAns(this.state.gameRecord);
-      console.log(this.state.gameRecord.language);
     }
   };
 
@@ -136,78 +166,70 @@ class App extends React.Component {
   // compare user input and answer
   compareAns = updatedState => {
     setTimeout(() => {
-      const { country, capital, userInput, language } = updatedState[
+      const { country, capital, userInput } = updatedState[
         updatedState.length - 1
       ];
       // process input and answer to pure alphabet
       const pureAlphInput = pureAlphabet(userInput);
       const pureAlphAns = pureAlphabet(capital);
-      console.log(this.state.language);
+      // console.log(this.state.languages);
+
       // compare both, if equal, update correctMessage, and prepare to ask the next question
       if (pureAlphInput === pureAlphAns) {
         //setState for correctMessage
-        this.stateSetter([
-          ["isCorrect", true]
-          // ["language", getLanguage(language)]
-        ]);
+        this.stateSetter([["isCorrect", true]]);
         this.stateSetter([
           [
             "correctMessage",
             [
-              "Brillant! ",
+              praise(),
               bolder(capital),
               " is the capital of ",
-              bolder(country)
+              bolder(country),
+              "."
             ]
           ]
         ]);
       } else {
         // setState for wrongMessage
-        this.stateSetter([
-          ["isCorrect", false]
-          // ["language", getLanguage(language)]
-        ]);
+        this.stateSetter([["isCorrect", false]]);
 
         this.stateSetter([
           [
             "wrongMessage",
             [
-              "Oh no! ",
+              pity(),
               bolder(userInput),
               " is not the capital of ",
               bolder(country),
               <br key={uuid.v4()} />,
               "The capital is",
-              bolder(capital)
+              bolder(capital),
+              "."
             ]
           ]
         ]);
       }
-      // shoe more info
+      // show more info
       setTimeout(() => {
         this.stateSetter([
           [
             "moreInfo",
-            [
-              "This is the basic information of",
-              bolder(country),
-              <div key={uuid.v4()}>
-                <br />
-              </div>
-            ]
+            ["Here's some basic information of", bolder(country), " :"]
           ]
         ]);
       }, 2000);
 
-      // fetch next country
+      // fetch next country delay
       setTimeout(() => {
         this.fetchRandomCountry();
-      }, 3000);
-    }, 1000);
+      }, 4000);
+      // compare delay
+    }, 500);
   };
 
   render() {
-    const { firstChatMessage, firstChatStyle } = firstChat;
+    const { firstChatMessage, firstChatStyle } = initialChat;
 
     return (
       <div className="app-layout" key={uuid.v4()}>
@@ -216,10 +238,17 @@ class App extends React.Component {
           <ChatboxLeft message={firstChatMessage} messageStyle={firstChatStyle}>
             <Playbtn playClicked={this.playClicked} />
           </ChatboxLeft>
+
+          {/* {this.state.secondChat} */}
+          {this.state.thirdChat}
           {this.state.noInput}
         </ChatboxFirstSpace>
         <ChatboxLayout gameRecord={this.state.gameRecord} key={uuid.v4()} />
-        <InputArea>
+        <InputArea
+          gameRecord={this.state.gameRecord}
+          toNext={this.playClicked}
+          showAns={this.showAns}
+        >
           <Searchbar addInput={this.inputProcessing} />
         </InputArea>
       </div>
