@@ -1,3 +1,13 @@
+Learn Capitals is a front-end project using countries data from REST Countries api (https://restcountries.eu/).
+It is presented as a chatting app form, the chatbot will actively ask you what the capital of a country is, and show the answer 
+after user answered. I will also provides more information of the country afterwards!
+
+This project is built with React.js cli and fully responsiive.
+
+Checkout the site: https://learn-capitals-meicc.netlify.com/
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
