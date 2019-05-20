@@ -9,7 +9,11 @@ class ChatboxLayout extends React.Component {
   }
 
   render() {
-    const children = [];
+    let children = [];
+    const updater = newChat => {
+      children = [...children, newChat];
+    };
+
     const { gameRecord } = this.props;
 
     for (let item of gameRecord) {
@@ -66,23 +70,22 @@ class ChatboxLayout extends React.Component {
       );
 
       const chatLogic = () => {
-        children.push(robotQuestion);
+        updater(robotQuestion);
         if (userAnswered) {
-          children.push(userAnswer);
-          // if(isCorrect) means if isCorrect exists!!!
+          updater(userAnswer);
           if (isCorrect === true) {
-            children.push(robotCorrectAnswer);
+            updater(robotCorrectAnswer);
           } else if (isCorrect === false) {
-            children.push(robotWrongAnswer);
+            updater(robotWrongAnswer);
           } else {
             return;
           }
           if (moreInfo !== false) {
-            children.push(robotMoreInfo);
+            updater(robotMoreInfo);
           }
         }
         if (userAnswered === false) {
-          children.push(robotMoreInfo);
+          updater(robotMoreInfo);
         }
       };
 
