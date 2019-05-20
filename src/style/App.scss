@@ -20,7 +20,7 @@ body {
 
 .app-header {
   width: 80vw;
-  height: 15vh;
+  height: 12vh;
   background-color: $headerBlue;
   display: flex;
   justify-content: center;
@@ -46,7 +46,6 @@ body {
 
 //ChatboxLayout---------
 .chatbox-layout {
-  // padding-top: 5vh;
   padding-bottom: 12vh;
   background-color: beige;
   display: flex;
@@ -80,7 +79,6 @@ body {
   margin-top: 1em;
   position: relative;
   display: flex;
-  // border: solid blue;
 }
 .chatbox-left {
   justify-content: flex-start;
@@ -134,14 +132,13 @@ body {
   align-items: center;
   position: relative;
   padding: 2em 0em;
+  justify-content: center;
 }
 .chat-content-left {
   background-color: $chatLightPink;
-  justify-content: flex-start;
 }
 .chat-content-right {
   background-color: $chatLightBlue;
-  justify-content: flex-end;
 }
 
 //chat-message---------
@@ -168,7 +165,7 @@ body {
   position: absolute;
   bottom: 0.5em;
   right: 1.5em;
-  padding: 0.1em 0.2em;
+  padding: 0.1em 0.3em;
 }
 .playbtn:hover {
   cursor: pointer;
@@ -189,7 +186,6 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  // border: solid blue;
 }
 
 //buttons
@@ -197,44 +193,29 @@ body {
 .btns {
   display: flex;
   align-items: center;
-  // margin-left: 7em;
-  // border: solid pink;
-}
-//input loci
-.input-loci {
-  margin-top: 0.5em;
-  // border: solid green;
-  display: flex;
-  align-items: center;
-}
-
-/* Searchbar */
-.searchbar {
-  // padding-right: 5vw;
-  margin: auto;
 }
 
 .input-form {
-  width: 350px;
-  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5em;
-  margin-left: 2.5em;
+  margin-left: 0.5em;
+  margin-top: 0.5em;
 }
 
 .input-field {
-  width: 100%;
+  width: 20vw;
   height: 1em;
   padding: 0.8em;
   border: 0.1em solid #ccc;
   border-radius: 0.3em;
-  font-size: 0.8em;
+  font-size: 0.7em;
   margin-bottom: 0.25em;
 }
 .input-button {
   font-size: 0.7em;
+  width: 15vw;
   height: 3em;
   background-color: $headerBlue;
   color: white;
@@ -242,6 +223,9 @@ body {
   font-weight: 700;
   padding: 0em 1em;
   margin-bottom: 0.25em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .input-button:hover {
   background-color: black;
@@ -250,10 +234,10 @@ body {
 }
 
 /* IconBtn */
-// buttos
+// buttons
 .iconbtn {
   height: 1em;
-  width: 7em;
+  width: 10vw;
   font-size: 1em;
   word-break: break-word;
   text-align: center;
@@ -266,12 +250,22 @@ body {
   margin-left: 1em;
   padding: 1em 0.3em;
   line-height: 1.3em;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .iconbtn:hover {
   cursor: pointer;
   background-color: black;
   color: white;
+}
+
+.btn-words {
+  margin-bottom: 0em;
+  position: absolute;
 }
 
 //moreInfo and flag rendering
@@ -285,15 +279,13 @@ body {
   align-items: center;
   justify-content: space-evenly;
   padding-top: 0.5em;
-  // border: solid green;
 }
 .country {
   font-size: 2em;
   font-family: "Baloo Bhai", cursive;
   font-weight: 900;
   text-align: center;
-  // margin-right: 1.5em;
-  line-height: 2em;
+  line-height: 1em;
 }
 .flag-style {
   width: 6em;
@@ -307,6 +299,35 @@ body {
   border-top: solid black;
   font-weight: 700;
 }
+
+// tablet
+@media only screen and (max-width: 768px) {
+  .app-layout {
+    width: 100vw;
+    margin-left: 0vw;
+    margin-right: 0vw;
+    font-size: 15px;
+  }
+  .app-header {
+    width: 100vw;
+  }
+  .header-text {
+    font-size: 2em;
+  }
+  .chatbox {
+    width: 90vw;
+  }
+  .chat-content {
+    width: 70vw;
+  }
+  .input-area {
+    width: 100vw;
+  }
+  .iconbtn {
+    width: 5em;
+  }
+}
+
 // mobile
 @media only screen and (max-width: 425px) {
   .app-layout {
@@ -318,7 +339,14 @@ body {
   .app-header {
     width: 100vw;
   }
-  .input-area {
-    width: 100vw;
+  .header-text {
+    font-size: 2em;
+  }
+  .input-field {
+    font-size: 0.5em;
+    height: 2.5em;
+  }
+  .iconbtn {
+    width: 5em;
   }
 }

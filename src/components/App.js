@@ -60,7 +60,7 @@ class App extends React.Component {
         Math.floor(Math.random() * 250)
       ];
       await this.dataSetUp(randomCountry);
-      // console.log(randomCountry);
+      console.log(randomCountry.capital);
     } catch (err) {
       console.error(err);
     }
@@ -193,7 +193,6 @@ class App extends React.Component {
       } else {
         // setState for wrongMessage
         this.stateSetter([["isCorrect", false]]);
-
         this.stateSetter([
           [
             "wrongMessage",
@@ -202,6 +201,7 @@ class App extends React.Component {
               bolder(userInput),
               " is not the capital of ",
               bolder(country),
+              ".",
               <br key={uuid.v4()} />,
               "The capital is",
               bolder(capital),

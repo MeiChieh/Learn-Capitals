@@ -8,7 +8,7 @@ const ChatboxRight = props => {
         <div className="chat-message chat-message-right ">{props.message}</div>
       </div>
       <div className="avatar avatar-right">
-        <img className="chaticon chaticon-right" src={user} alt="" />
+        <img className="chaticon chaticon-right" src={user} alt="user icon" />
       </div>
     </div>
   );

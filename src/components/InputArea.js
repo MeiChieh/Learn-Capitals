@@ -16,7 +16,7 @@ const InputArea = props => {
           message="Show Answer"
         />
       </div>
-      <div className="input-loci">{props.children}</div>
+      <div>{props.children}</div>
     </div>
   );
 };
