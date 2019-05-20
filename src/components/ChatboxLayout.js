@@ -1,7 +1,7 @@
 import React from "react";
 import ChatboxLeft from "./ChatboxLeft";
 import ChatboxRight from "./ChatboxRight";
-import { bolder } from "./helper.js";
+import { bolder, randomQuestion } from "./helper.js";
 
 class ChatboxLayout extends React.Component {
   componentDidMount() {
@@ -31,7 +31,7 @@ class ChatboxLayout extends React.Component {
 
       const robotQuestion = (
         <ChatboxLeft
-          message={["What is the capital of ", bolder(country), "?"]}
+          message={[randomQuestion(), bolder(country), "?"]}
           key={idLs[0]}
         />
       );

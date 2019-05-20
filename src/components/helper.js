@@ -120,6 +120,20 @@ export const numNotation = num => {
   return result.reverse().join("");
 };
 
+// random questions
+export const randomQuestion = () => {
+  const questions = [
+    "What is the capital of ",
+    "Please tell me what is the capital of ",
+    "You must know this one, what is the capital of ",
+    "Tell me, tell me, what is the capital of ",
+    "This is fun! Tell me the capital of",
+    "I really want to know, what is the capital of "
+  ];
+
+  return questions[Math.floor(Math.random() * questions.length)];
+};
+
 // random string of praise
 export const praise = () => {
   const niceWords = [
